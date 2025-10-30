@@ -53,7 +53,17 @@ variable "nodepools" {
   }
 }
 
-variable "acr_name" {
+variable "acr_dev" {
   type        = string
-  description = "Azure Container Registry"
+  description = "Azure Container Registry dev"
+}
+
+variable "acr_stg" {
+  type        = string
+  description = "Azure Container Registry name stage"
+}
+
+variable "acr_prod" {
+  type        = string
+  description = "Azure Container Registry name prod"
 }

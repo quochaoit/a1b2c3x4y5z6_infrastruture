@@ -68,15 +68,41 @@ resource "azurerm_kubernetes_cluster_node_pool" "k8s-worker" {
 # Provision Acr
 # azurerm_container_registry to create Azure Container Registry
 # official documentation https://registry.terraform.io/providers/hashicorp/azurerm/3.65.0/docs/resources/container_registry
-resource "azurerm_container_registry" "acr" {
-  name                = var.acr_name
+resource "azurerm_container_registry" "acrdev" {
+  name                = var.acr_dev
   location            = var.region
   resource_group_name = var.resource_group_name
   sku                 = "Basic"
   }
-  resource "azurerm_role_assignment" "example" {
+  resource "azurerm_role_assignment" "aza-dev" {
     principal_id                     = azurerm_kubernetes_cluster.k8s.kubelet_identity[0].object_id
     role_definition_name             = "AcrPull"
-    scope                            = azurerm_container_registry.acr.id
+    scope                            = azurerm_container_registry.acrdev.id
+    skip_service_principal_aad_check = true
+  }
+
+resource "azurerm_container_registry" "acrstg" {
+  name                = var.acr_stg
+  location            = var.region
+  resource_group_name = var.resource_group_name
+  sku                 = "Basic"
+  }
+  resource "azurerm_role_assignment" "aza-stg" {
+    principal_id                     = azurerm_kubernetes_cluster.k8s.kubelet_identity[0].object_id
+    role_definition_name             = "AcrPull"
+    scope                            = azurerm_container_registry.acrstg.id
+    skip_service_principal_aad_check = true
+  }
+
+  resource "azurerm_container_registry" "acrprod" {
+  name                = var.acr_prod
+  location            = var.region
+  resource_group_name = var.resource_group_name
+  sku                 = "Basic"
+  }
+  resource "azurerm_role_assignment" "aza-prod" {
+    principal_id                     = azurerm_kubernetes_cluster.k8s.kubelet_identity[0].object_id
+    role_definition_name             = "AcrPull"
+    scope                            = azurerm_container_registry.acrprod.id
     skip_service_principal_aad_check = true
   }

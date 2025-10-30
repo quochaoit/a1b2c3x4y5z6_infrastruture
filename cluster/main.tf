@@ -27,6 +27,8 @@ module "aks_with_node_group" {
   resource_group_name = module.vnet_with_subnets.az_rg_name
   az_subnet_id        = module.vnet_with_subnets.az_subnet_id
   nodepools           = var.nodepools
-  acr_name            = var.acr_name
+  acr_dev             = var.acr_dev
+  acr_stg             = var.acr_stg
+  acr_prod            = var.acr_prod
 }
 

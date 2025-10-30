@@ -21,8 +21,20 @@ variable "k8s_version" {
   default     = "1.31"
 }
 
-variable "acr_name" {
+variable "acr_dev" {
   type        = string
-  description = "Azure Container Registry name"
-  default     = "a1b2c3x4y5z6-acr"
+  description = "Azure Container Registry name dev"
+  default     = "a1b2c3x4y5z6acrdev"
+}
+
+variable "acr_stg" {
+  type        = string
+  description = "Azure Container Registry name stage"
+  default     = "a1b2c3x4y5z6acrstg"
+}
+
+variable "acr_prod" {
+  type        = string
+  description = "Azure Container Registry name prod"
+  default     = "a1b2c3x4y5z6acrprod"
 }

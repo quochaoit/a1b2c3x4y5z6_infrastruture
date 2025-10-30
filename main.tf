@@ -23,6 +23,9 @@ module "cluster" {
 
   region       = var.region
   cluster_name = var.cluster_name
+  resource_group_name = var.resource_group_name
   k8s_version  = var.k8s_version
-  acr_name     = var.acr_name
+  acr_dev     = var.acr_dev
+  acr_stg     = var.acr_stg
+  acr_prod     = var.acr_prod
 }
